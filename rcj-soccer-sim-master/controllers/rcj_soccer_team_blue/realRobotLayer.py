@@ -101,8 +101,10 @@ class RealRobotLayer:
             self.moveWheels(1, 1)
         elif rotDist < 5:
             self.rotateSmoothly(direction, 1, 0.9)
+            print("MEnos de 5")
         elif rotDist < 15:
             self.rotateSmoothly(direction, 1, 0.8)
+            print("menos de 15")
         else:
             self.rotateInPlace(direction, 1)
 

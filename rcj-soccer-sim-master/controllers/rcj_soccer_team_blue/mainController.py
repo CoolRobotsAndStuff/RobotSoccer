@@ -23,10 +23,10 @@ class mainController:
     
     def run(self):
         self.update()
-        
         #self.robot1.moveWheels(0.5, -0.5)
-        self.robot1.moveToCoords([0.5, 0.5])
-        
+        #self.robot1.moveToCoords(self.ball.position)
+        self.robot1.rotateInPlace()
+
         print("Rotation:", self.robot1.rotationInDegs)
         print("Position:", self.robot1.position)
 
