@@ -1,4 +1,4 @@
-from MainController import MainController
+from mainController import MainController
 import time
 
 controller = MainController(32)

@@ -27,7 +27,7 @@ class MainController:
         self.robot1.moveToCoords(self.ball.position)
         #self.robot1.rotateInPlace()
 
-        print("Rotation:", self.robot1.rotationInDegs)
+        print("Rotation:", self.robot1.rotation.d)
         print("Position:", self.robot1.position)
 
         

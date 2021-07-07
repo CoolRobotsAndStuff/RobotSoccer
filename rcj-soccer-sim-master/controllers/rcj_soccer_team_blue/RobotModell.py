@@ -1,5 +1,6 @@
 import math
 from UtilityFunctions import *
+from angles import Angle
 
 # Controlls a wheel
 class Wheel:
@@ -41,7 +42,7 @@ class RobotModell:
         self.playerId = int(self.name[1])
 
         # Location variables
-        self.rotation = 0
+        self.rotation = Angle(r=0)
         self.position = [0, 0]
     
     def setRotation(self, rotation):
@@ -52,11 +53,7 @@ class RobotModell:
         elif rotation < (math.pi / 2) * -1:
             rotation = (math.pi * -1 - rotation) * -1
         """
-        self.rotation = rotation
-    
-    @property
-    def rotationInDegs(self):
-        return radsToDegs(self.rotation)
+        self.rotation.r = rotation
 
     def setPosition(self, position):
         self.position = position
@@ -68,11 +65,11 @@ class RobotModell:
         self.leftWheel.setVelocity(ratio2 * self.maxSpeed)
     
 
-    def getDiffToDegs(self, degs):
-        return self.rotationInDegs - degs
+    def getDiffToAng(self, ang):
+        return self.rotation - ang
     
-    def getDistToDegs(self, degs):
-        return max(round(self.rotationInDegs), degs) - min(self.rotationInDegs, degs)
+    def getDistToAng(self, ang):
+        return Angle(d=max(round(self.rotation.d), ang.d) - min(self.rotation.d, ang.d))
     
     def rotateInPlace(self, direction, speedFract):
         self.moveWheels(direction[0] * speedFract, direction[1] * speedFract)
@@ -85,24 +82,24 @@ class RobotModell:
     
     def moveToCoords(self, coords):
         posDiff = substractLists(self.position, coords)
-        ang = getDegsFromCoords(posDiff)
+        ang = Angle(d=getDegsFromCoords(posDiff))
         posDist = getDistance(posDiff)
-        rotDist = self.getDistToDegs(ang)
-        rotDiff = self.getDiffToDegs(ang)
-        print("rotDiff:", rotDiff)
-        print("traget ang: ", ang)
+        rotDist = self.getDistToAng(ang)
+        rotDiff = self.getDiffToAng(ang)
+        print("rotDiff:", rotDiff.d)
+        print("traget ang: ", ang.d)
         
-        if 180 > rotDiff > 0 or rotDiff < -180:
+        if 180 > rotDiff.d > 0 or rotDiff.d < -180:
             direction = [1, -1]
         else:
             direction = [-1, 1]
 
-        if  rotDist < 2:
+        if  rotDist.d < 2:
             self.moveWheels(1, 1)
-        elif rotDist < 5:
+        elif rotDist.d < 5:
             self.rotateSmoothly(direction, 1, 0.9)
             print("MEnos de 5")
-        elif rotDist < 15:
+        elif rotDist.d < 15:
             self.rotateSmoothly(direction, 1, 0.8)
             print("menos de 15")
         else:
