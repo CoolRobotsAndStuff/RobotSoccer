@@ -1,7 +1,7 @@
-from mainController import mainController
+from MainController import MainController
 import time
 
-controller = mainController(32)
+controller = MainController(32)
 
 while controller.doLoop():
     controller.run()

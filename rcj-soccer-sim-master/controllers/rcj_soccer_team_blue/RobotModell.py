@@ -1,5 +1,5 @@
 import math
-from utilityFunctions import *
+from UtilityFunctions import *
 
 # Controlls a wheel
 class Wheel:
@@ -24,7 +24,7 @@ class Wheel:
         return self.velocity
 
 # Abstraction layer for robot
-class RealRobotLayer:
+class RobotModell:
     def __init__(self, timeStep, name):
         # Important variables
         self.timeStep = timeStep

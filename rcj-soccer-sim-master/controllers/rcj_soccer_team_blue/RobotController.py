@@ -1,6 +1,6 @@
 from controller import Robot
 import math
-from utilityFunctions import *
+from UtilityFunctions import *
 import struct
 
 class Comunicator:
@@ -84,7 +84,7 @@ class Wheel:
         self.wheel.setVelocity(velocity)
 
 # Abstraction layer for robot
-class ControllerLayer:
+class Controller:
     def __init__(self, timeStep):
         # Important variables
 
