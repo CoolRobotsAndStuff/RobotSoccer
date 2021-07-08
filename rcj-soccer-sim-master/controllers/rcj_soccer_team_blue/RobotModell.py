@@ -46,13 +46,6 @@ class RobotModell:
         self.position = [0, 0]
     
     def setRotation(self, rotation):
-
-        """
-        if rotation > math.pi / 2:
-            rotation = (math.pi - rotation) * -1
-        elif rotation < (math.pi / 2) * -1:
-            rotation = (math.pi * -1 - rotation) * -1
-        """
         self.rotation.r = rotation
 
     def setPosition(self, position):
@@ -82,7 +75,7 @@ class RobotModell:
     
     def moveToCoords(self, coords):
         posDiff = substractLists(self.position, coords)
-        ang = Angle(d=getDegsFromCoords(posDiff))
+        ang = getAngFromCoords(posDiff)
         posDist = getDistance(posDiff)
         rotDist = self.getDistToAng(ang)
         rotDiff = self.getDiffToAng(ang)
@@ -94,13 +87,9 @@ class RobotModell:
         else:
             direction = [-1, 1]
 
-        if  rotDist.d < 2:
-            self.moveWheels(1, 1)
-        elif rotDist.d < 5:
-            self.rotateSmoothly(direction, 1, 0.9)
-            print("MEnos de 5")
-        elif rotDist.d < 15:
-            self.rotateSmoothly(direction, 1, 0.8)
+        rotSpeed = mapVals(rotDist.d, 15, 2, 0.6, 1)
+        if rotDist.d < 30:
+            self.rotateSmoothly(direction, 1, rotSpeed)
             print("menos de 15")
         else:
             self.rotateInPlace(direction, 1)

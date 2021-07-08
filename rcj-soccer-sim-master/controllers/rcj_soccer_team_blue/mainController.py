@@ -1,7 +1,7 @@
 from RobotModell import RobotModell
 from RobotController import Controller
 from BallModell import Ball
-import time
+
 
 class MainController:
     def __init__(self, timeStep):

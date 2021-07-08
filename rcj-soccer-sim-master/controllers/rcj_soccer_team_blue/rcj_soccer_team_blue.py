@@ -1,7 +1,7 @@
 from mainController import MainController
-import time
 
-controller = MainController(32)
+timeStep = 32
+controller = MainController(timeStep)
 
 while controller.doLoop():
     controller.run()

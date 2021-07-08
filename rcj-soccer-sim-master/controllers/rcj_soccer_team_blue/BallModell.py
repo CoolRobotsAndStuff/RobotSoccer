@@ -1,10 +1,10 @@
 from UtilityFunctions import *
-
+from angles import Angle
 
 class Ball:
 
     def __init__(self):
-        self.rotation = 0
+        self.rotation = Angle(r=0)
         self.position = [0, 0]
         self.prevPosition = [0, 0]
         self.radious = 0
@@ -16,8 +16,7 @@ class Ball:
             accuracy = getDistance(posDiff)
             #print("accuracy: " + str(accuracy))
             if accuracy > 0.001:
-                degs = getDegsFromCoords(posDiff)
-                return normalizeDegs(degs)
+                return getAngFromCoords(posDiff)
         return None
 
     def setPosition(self, position):
